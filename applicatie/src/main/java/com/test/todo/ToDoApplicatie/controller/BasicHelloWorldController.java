@@ -1,5 +1,6 @@
 package com.test.todo.ToDoApplicatie.controller;
 
+import com.test.todo.ToDoApplicatie.model.ToDoDTO;
 import com.test.todo.ToDoApplicatie.service.ToDoService;
 import jakarta.annotation.Resource;
 import org.springframework.http.HttpStatusCode;
@@ -11,10 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/test")
 @RestController
-public class Controller {
-
-    @Resource
-    ToDoService toDoService;
+public class BasicHelloWorldController {
 
     @GetMapping
     public ResponseEntity<String> getTest(){
