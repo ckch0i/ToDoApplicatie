@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/todo")
 @RestController
 public class ToDoController {
@@ -32,6 +34,12 @@ public class ToDoController {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ToDoDTO>> getAllToDo() {
+        List<ToDoDTO> result = toDoService.haalAlleToDo();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

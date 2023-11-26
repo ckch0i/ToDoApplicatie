@@ -7,6 +7,8 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -29,6 +31,12 @@ public class ToDoService {
             return mapEntityNaarDTO(result);
         }
         return null;
+    }
+    public List<ToDoDTO> haalAlleToDo() {
+        Iterable<ToDo> gevondenToDo = repository.findAll();
+        List<ToDoDTO> result = new ArrayList<>();
+        gevondenToDo.forEach( todo -> result.add(mapEntityNaarDTO(todo)));
+        return result;
     }
 
     private ToDo mapDTONaarEntity(ToDoDTO toDoDTO){

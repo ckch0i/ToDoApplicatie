@@ -10,8 +10,8 @@ import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("io/cucumber/skeleton")
+@SelectClasspathResource("feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "io.cucumber.skeleton")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.test.todo.cucumber.stepdefs")
 public class RunCucumberTest {
 }
