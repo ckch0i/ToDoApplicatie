@@ -1,6 +1,8 @@
 package com.test.todo.cucumber.stepdefs;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -17,6 +19,28 @@ public class HelloWorldStepDef {
         Response response = request.get();
 
         String jsonString = response.asString();
+
         Assertions.assertEquals(verwachtteResultaat, jsonString);
+    }
+    @And("status code zou moeten zijn: {int}")
+        public void statusCodeZouMoetenZijn ( int arg0){
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        Response response = request.get();
+
+        String jsonString = response.asString();
+
+        Assertions.assertEquals(200, response.getStatusCode());
+        }
+    @Then("genereerd er een unieke ID voor het verstuurde bericht met omschrijving: {string}")
+    public void genereerdErEenUniekeIDVoorHetVerstuurdeBerichtMetOmschrijving(String arg0) {
+
+        String actualDescription = response.jsonPath().getString("omschrijving");
+
+        Assertions.assertEquals("vuilnis ophalen", actualDescription);
+        Assertions.assertNotNull(generatedUniqueId);
+
+        System.out.println("Dynamically generated uniekeId: " + generatedUniqueId);
+
     }
 }
