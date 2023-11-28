@@ -32,15 +32,4 @@ public class HelloWorldStepDef {
 
         Assertions.assertEquals(200, response.getStatusCode());
         }
-    @Then("genereerd er een unieke ID voor het verstuurde bericht met omschrijving: {string}")
-    public void genereerdErEenUniekeIDVoorHetVerstuurdeBerichtMetOmschrijving(String arg0) {
-
-        String actualDescription = response.jsonPath().getString("omschrijving");
-
-        Assertions.assertEquals("vuilnis ophalen", actualDescription);
-        Assertions.assertNotNull(generatedUniqueId);
-
-        System.out.println("Dynamically generated uniekeId: " + generatedUniqueId);
-
-    }
 }
