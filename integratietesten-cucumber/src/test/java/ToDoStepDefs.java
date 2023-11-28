@@ -11,7 +11,7 @@ public class ToDoStepDefs {
         RestAssured.baseURI = "http://localhost:8080/test";
         RequestSpecification request2 = RestAssured.given();
         Response response = request2.post();
-        System.out.println("test");
+        System.out.println("Response is: " + response.asPrettyString());
     }
 
 }
