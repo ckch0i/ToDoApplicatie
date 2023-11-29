@@ -1,8 +1,10 @@
+import com.test.todo.cucumber.domain.ToDoResponse;
 import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.Assertions;
 
 public class ToDoStepDefs {
     private static final String BASE_URL = "http://localhost:8080/todo";
@@ -20,28 +22,18 @@ public class ToDoStepDefs {
 
         //Nieuwe Get request met deze unieke ID
         String Geturl = "http://localhost:8080/todo?uniekeId=" + UniekeID;
-        String endpoint = "/todo";
-
-        Response response2 = RestAssured.given()
+        Response ingevoerdeToDo = RestAssured.given()
                 .param("UniekeID")
                 .when()
                 .get(Geturl);
+        String opgehaaldeToDoOmschrijving = ingevoerdeToDo.path("omschrijving");
 
-        int statusCode = response2.getStatusCode();
-        String responseBody = response2.getBody().asString();
-
-        String getomschrijving = response2.path("omschrijving");
-        System.out.println("get result omschrijving:" + getomschrijving);
+        //regel 25 veranderen TodoResponse, Object // velden
 
         //Verify omschrijving met verwachte result
+        Assertions.assertEquals(opgehaaldeToDoOmschrijving, omschrijving);
+        System.out.println("Assertion passed! " + opgehaaldeToDoOmschrijving + " komt overeen met " + omschrijving);
 
-        RestAssured.given().that().body(getomschrijving).equals(omschrijving);
-        try {
-        System.out.println("Assertion passed! " + getomschrijving + " komt overeen met " + omschrijving);
-        } catch (AssertionError e) {
-            System.out.println("Assertion failed " + getomschrijving + " komt niet overeen met " + omschrijving);
-            e.printStackTrace();
-        }
 
 
     }
