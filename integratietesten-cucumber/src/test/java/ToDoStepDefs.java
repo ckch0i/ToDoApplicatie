@@ -14,9 +14,36 @@ public class ToDoStepDefs {
                 .contentType(ContentType.JSON);
         Response response = request2.post();
         System.out.println("Response is: " + response.asPrettyString());
+
         //TODO:Unieke ID vasthouden in eigen string
+        String UniekeID = response.path("uniekeId");
+
         //Nieuwe Get request met deze unieke ID
+        String Geturl = "http://localhost:8080/todo?uniekeId=" + UniekeID;
+        String endpoint = "/todo";
+
+        Response response2 = RestAssured.given()
+                .param("UniekeID")
+                .when()
+                .get(Geturl);
+
+        int statusCode = response2.getStatusCode();
+        String responseBody = response2.getBody().asString();
+
+        String getomschrijving = response2.path("omschrijving");
+        System.out.println("get result omschrijving:" + getomschrijving);
+
         //Verify omschrijving met verwachte result
+
+        RestAssured.given().that().body(getomschrijving).equals(omschrijving);
+        try {
+        System.out.println("Assertion passed! " + getomschrijving + " komt overeen met " + omschrijving);
+        } catch (AssertionError e) {
+            System.out.println("Assertion failed " + getomschrijving + " komt niet overeen met " + omschrijving);
+            e.printStackTrace();
+        }
+
+
     }
 
 }
