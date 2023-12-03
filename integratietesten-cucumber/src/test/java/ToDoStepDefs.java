@@ -21,18 +21,12 @@ public class ToDoStepDefs {
         String UniekeID = response.path("uniekeId");
 
         //Nieuwe Get request met deze unieke ID
-        String Geturl = "http://localhost:8080/todo?uniekeId=" + UniekeID;
-        Response ingevoerdeToDo = RestAssured.given()
-                .param("UniekeID")
-                .when()
-                .get(Geturl);
-        String opgehaaldeToDoOmschrijving = ingevoerdeToDo.path("omschrijving");
-
-        //regel 25 veranderen TodoResponse, Object // velden
+        Response ingevoerdeToDo = RestAssured.given().get(BASE_URL+ "?uniekeId=" + UniekeID);
+        ToDoResponse toDoResponse = ingevoerdeToDo.then().extract().as(ToDoResponse.class);
 
         //Verify omschrijving met verwachte result
-        Assertions.assertEquals(opgehaaldeToDoOmschrijving, omschrijving);
-        System.out.println("Assertion passed! " + opgehaaldeToDoOmschrijving + " komt overeen met " + omschrijving);
+        Assertions.assertEquals(toDoResponse.getOmschrijving(), omschrijving);
+        System.out.println("Assertion passed! " + toDoResponse.getOmschrijving() + " komt overeen met " + omschrijving);
 
 
 

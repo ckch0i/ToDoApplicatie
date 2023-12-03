@@ -10,4 +10,16 @@ public class ToDoResponse {
     public String uniekeId;
     public String omschrijving;
     public String aangemaaktOp;
+
+    public String getUniekeId() {
+        return uniekeId;
+    }
+
+    public String getOmschrijving() {
+        return omschrijving;
+    }
+
+    public String getAangemaaktOp() {
+        return aangemaaktOp;
+    }
 }
