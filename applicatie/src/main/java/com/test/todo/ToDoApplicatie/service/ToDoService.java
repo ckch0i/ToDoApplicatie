@@ -21,9 +21,9 @@ public class ToDoService {
     public ToDoDTO maakDTO(ToDoDTO toDoDTO) {
         ToDo entity = mapDTONaarEntity(toDoDTO);
         ToDo repositoryResult = repository.save(entity);
-        ToDoDTO result = new ToDoDTO();
-        result.setUniekeId(repositoryResult.getUniekeId());
-        return result;
+        ToDoDTO response = new ToDoDTO();
+        response.setUniekeId(repositoryResult.getUniekeId());
+        return response;
     }
 
     public ToDoDTO zoekToDo(String uniekeId) {
@@ -36,6 +36,13 @@ public class ToDoService {
 
     public List<ToDoDTO> haalAlleToDo() {
         Iterable<ToDo> gevondenToDo = repository.findAll();
+        List<ToDoDTO> result = new ArrayList<>();
+        gevondenToDo.forEach(todo -> result.add(mapEntityNaarDTO(todo)));
+        return result;
+    }
+
+    public List<ToDoDTO> haalAlleActieveToDo() {
+        Iterable<ToDo> gevondenToDo = repository.findByStatusEqualsIgnoreCase(ToDoDTO.Status.ACTIEF.name());
         List<ToDoDTO> result = new ArrayList<>();
         gevondenToDo.forEach(todo -> result.add(mapEntityNaarDTO(todo)));
         return result;

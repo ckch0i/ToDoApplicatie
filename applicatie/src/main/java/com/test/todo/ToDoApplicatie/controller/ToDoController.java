@@ -42,4 +42,10 @@ public class ToDoController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/all/actief")
+    public ResponseEntity<List<ToDoDTO>> getAlleActieveToDos() {
+        List<ToDoDTO> result = toDoService.haalAlleActieveToDo();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }
