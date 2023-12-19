@@ -10,7 +10,7 @@ import java.util.UUID;
 @UtilityClass
 public class ToDoMapper {
 
-    public static ToDo mapDTONaarEntity(ToDoDTO toDoDTO){
+    public static ToDo mapDTONaarEntity(ToDoDTO toDoDTO) {
         ToDo entity = new ToDo();
         entity.setOmschrijving(toDoDTO.getOmschrijving());
         entity.setAangemaaktOp(Instant.now());
@@ -18,7 +18,7 @@ public class ToDoMapper {
         return entity;
     }
 
-    public static ToDoDTO mapEntityNaarDTO(ToDo todo){
+    public static ToDoDTO mapEntityNaarDTO(ToDo todo) {
         ToDoDTO dto = new ToDoDTO();
         dto.setOmschrijving(todo.getOmschrijving());
         dto.setAangemaaktOp(todo.getAangemaaktOp().toString());
