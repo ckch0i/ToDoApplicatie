@@ -19,6 +19,7 @@ public class ToDoUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(unique=true)
     private String username;
     private String password;
 
